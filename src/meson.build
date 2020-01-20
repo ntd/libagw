@@ -30,8 +30,8 @@ libagw_cflags = [
 
 install_data(libagw_assets,  install_dir: assetsdir)
 
-library('libagw',
-        sources: libagw_sources,
-        dependencies: libagw_deps,
-        c_args: libagw_cflags,
-        install: true)
+libagw = library('libagw',
+                 sources: libagw_sources,
+                 dependencies: libagw_deps,
+                 c_args: libagw_cflags,
+                 install: true)

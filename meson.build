@@ -9,3 +9,4 @@ gtk_dep  = dependency('gtk+-3.0')
 rsvg_dep = dependency('librsvg-2.0')
 
 subdir('src')
+subdir('test')
