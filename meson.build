@@ -1,4 +1,4 @@
-project('xpray', 'c', version: '0.1.0', license: 'LGPLv2.1+')
+project('libagw', 'c', version: '0.1.0', license: 'LGPLv2.1+')
 
 prefix     = get_option('prefix')
 datadir    = join_paths(prefix, get_option('datadir'))
