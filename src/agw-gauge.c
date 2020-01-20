@@ -125,11 +125,15 @@ draw(GtkWidget *widget, cairo_t *cr)
 static void
 free_svg(AgwGaugePrivate *priv)
 {
+    RsvgHandle **svg;
     gint i;
 
     for (i = 0; i < AGW_GAUGE_ELEMENT_LAST; ++i) {
-        g_object_unref(G_OBJECT(priv->svg[i]));
-        priv->svg[i] = NULL;
+        svg = priv->svg + i;
+        if (*svg != NULL) {
+            g_object_unref(G_OBJECT(*svg));
+            *svg = NULL;
+        }
     }
 }
 
