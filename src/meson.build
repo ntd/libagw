@@ -1,9 +1,9 @@
-libagw_sources = files([
+agw_sources = files([
     'agw-gauge.h',
     'agw-gauge.c',
 ])
 
-libagw_assets = files([
+agw_assets = files([
     'assets/clock-drop-shadow.svg',
     'assets/clock-face-shadow.svg',
     'assets/clock-face.svg',
@@ -18,20 +18,20 @@ libagw_assets = files([
     'assets/clock-second-hand.svg',
 ])
 
-libagw_deps = [
+agw_deps = [
     gtk_dep,
     rsvg_dep,
 ]
 
-libagw_cflags = [
+agw_cflags = [
     '-DSRCDIR="' + meson.current_source_dir() + '"',
     '-DPKGDATADIR="' + pkgdatadir + '"',
 ]
 
-install_data(libagw_assets,  install_dir: assetsdir)
+install_data(agw_assets,  install_dir: assetsdir)
 
-libagw = library('libagw',
-                 sources: libagw_sources,
-                 dependencies: libagw_deps,
-                 c_args: libagw_cflags,
-                 install: true)
+agw = library('agw',
+              sources: agw_sources,
+              dependencies: agw_deps,
+              c_args: agw_cflags,
+              install: true)

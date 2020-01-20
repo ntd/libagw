@@ -9,7 +9,7 @@ ardecoder_deps = [
 
 executable('ardecoder',
            sources: ardecoder_sources,
-           link_with: libagw,
+           link_with: agw,
            dependencies: ardecoder_deps,
-           c_args: libagw_cflags,
+           c_args: agw_cflags,
            install: false)
