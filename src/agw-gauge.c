@@ -79,7 +79,8 @@ draw(GtkWidget *widget, cairo_t *cr)
 {
     AgwGauge *gauge = AGW_GAUGE(widget);
     AgwGaugePrivate *priv = agw_gauge_get_instance_private(gauge);
-    GtkAdjustment *adjustment = gtk_range_get_adjustment(GTK_RANGE(widget));
+    GtkRange *range = GTK_RANGE(widget);
+    GtkAdjustment *adjustment = gtk_range_get_adjustment(range);
     GtkAllocation room;
     gdouble size, angle;
 
@@ -101,7 +102,12 @@ draw(GtkWidget *widget, cairo_t *cr)
 
     /* Draw the hand */
     angle = gtk_adjustment_get_value(adjustment) *
-            G_PI / gtk_adjustment_get_upper(adjustment) - G_PI_2;
+            G_PI / gtk_adjustment_get_upper(adjustment);
+    if (gtk_range_get_inverted(range)) {
+        angle = -angle;
+    }
+    angle -= G_PI_2;
+
     cairo_save(cr);
     cairo_translate(cr, priv->width / 2, priv->height / 2);
     cairo_save(cr);
