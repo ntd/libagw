@@ -15,6 +15,8 @@ GtkWidget *     agw_gauge_new               (void);
 gboolean        agw_gauge_set_theme         (AgwGauge *     gauge,
                                              const gchar *  theme_dir,
                                              GError **      error);
+void            agw_gauge_set_value         (AgwGauge *     gauge,
+                                             gdouble        value);
 
 G_END_DECLS
 

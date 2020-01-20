@@ -219,3 +219,35 @@ agw_gauge_set_theme(AgwGauge *gauge, const gchar *theme_dir, GError **error)
 
     return TRUE;
 }
+
+/**
+ * agw_gauge_set_value:
+ * @gauge: an #AgwGauge
+ * @value: new value of the gauge
+ *
+ * Sets the current value of the gauge; if the value is outside the
+ * minimum or maximum range values, it will be wrapped around to fit
+ * inside them. The gauge emits the #AgwGauge::value-changed signal if
+ * the value changes.
+ **/
+void
+agw_gauge_set_value(AgwGauge *gauge, gdouble value)
+{
+    GtkAdjustment *adjustment;
+    gdouble lower, upper;
+
+    g_return_if_fail(AGW_IS_GAUGE(gauge));
+
+    adjustment = gtk_range_get_adjustment(GTK_RANGE(gauge));
+    lower = gtk_adjustment_get_lower(adjustment);
+    upper = gtk_adjustment_get_upper(adjustment);
+
+    while (value < lower) {
+        value += upper - lower;
+    }
+    while (value > upper) {
+        value -= upper - lower;
+    }
+
+    gtk_adjustment_set_value(adjustment, value);
+}
