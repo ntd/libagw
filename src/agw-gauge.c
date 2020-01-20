@@ -80,15 +80,14 @@ draw(GtkWidget *widget, cairo_t *cr)
     AgwGauge *gauge = AGW_GAUGE(widget);
     AgwGaugePrivate *priv = agw_gauge_get_instance_private(gauge);
     GtkAdjustment *adjustment = gtk_range_get_adjustment(GTK_RANGE(widget));
-    GtkAllocation allocation;
-    gint size;
-    gdouble angle;
+    GtkAllocation room;
+    gdouble size, angle;
 
-    gtk_widget_get_allocation(widget, &allocation);
-    size = MIN(allocation.width, allocation.height);
+    gtk_widget_get_allocation(widget, &room);
+    size = MIN(room.width, room.height);
 
-    cairo_scale(cr, (double) size / priv->width, (double) size / priv->height);
-    cairo_translate(cr, (allocation.width - size) / 2, (allocation.height - size) / 2);
+    cairo_translate(cr, (room.width - size) / 2, (room.height - size) / 2);
+    cairo_scale(cr, size / priv->width, size / priv->height);
 
     /* Clear the surface */
     cairo_set_source_rgba(cr, 1, 1, 1, 0);
