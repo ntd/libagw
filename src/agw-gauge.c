@@ -176,6 +176,13 @@ agw_gauge_init(AgwGauge *gauge)
 }
 
 
+/**
+ * agw_gauge_new:
+ *
+ * Creates a new #AgwGauge widget.
+ *
+ * Returns: the newly created widget
+ **/
 GtkWidget *
 agw_gauge_new(void)
 {
@@ -186,6 +193,20 @@ agw_gauge_new(void)
     return widget;
 }
 
+/**
+ * agw_gauge_set_theme:
+ * @gauge: an #AgwGauge
+ * @theme_dir: path to the new theme
+ * @error: (allow-none): return location for a #GError, or %NULL
+ *
+ * Sets the new theme on @gauge. A theme is a collection of SVG files
+ * with specific names and @theme_dir is the path to the folder
+ * containing those files. The conventions used are intentionally
+ * compatible with the [cairo-clock](https://launchpad.net/cairo-clock)
+ * project, so any cairo-clock theme can be used.
+ *
+ * @return: TRUE if the theme has been succesfully changed.
+ **/
 gboolean
 agw_gauge_set_theme(AgwGauge *gauge, const gchar *theme_dir, GError **error)
 {
