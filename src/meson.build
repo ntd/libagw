@@ -18,6 +18,10 @@ agw_assets = files([
     'assets/clock-second-hand.svg',
 ])
 
+agw_soversion = '@0@.@1@.@2@'.format(agw_current - agw_age,
+                                     agw_age,
+                                     agw_revision)
+
 agw_deps = [
     gtk_dep,
     rsvg_dep,
@@ -33,5 +37,6 @@ install_data(agw_assets,  install_dir: assetsdir)
 agw = library('agw',
               sources: agw_sources,
               dependencies: agw_deps,
+              version: agw_soversion,
               c_args: agw_cflags,
               install: true)
