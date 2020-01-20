@@ -142,6 +142,40 @@ free_svg(AgwGaugePrivate *priv)
     }
 }
 
+static gboolean
+set_theme(AgwGaugePrivate *priv, const gchar *theme_dir, GError **error)
+{
+    gchar *file;
+    RsvgHandle *svg;
+    RsvgDimensionData dimension;
+    gint i;
+
+    priv->width  = 0;
+    priv->height = 0;
+    free_svg(priv);
+
+    for (i = 0; i < AGW_GAUGE_ELEMENT_LAST; ++i) {
+        file = g_build_filename(theme_dir, theme_file[i], NULL);
+        svg  = rsvg_handle_new_from_file(file, error);
+        g_free(file);
+
+        /* On errors, return false without further processing */
+        if (svg == NULL) {
+            g_assert(error == NULL || *error != NULL);
+            return FALSE;
+        }
+
+        /* Get the extents of the biggest element */
+        rsvg_handle_get_dimensions(svg, &dimension);
+        priv->width  = MAX(dimension.width, priv->width);
+        priv->height = MAX(dimension.height, priv->height);
+
+        priv->svg[i] = svg;
+    }
+
+    return TRUE;
+}
+
 static void
 finalize(GObject *object)
 {
@@ -167,12 +201,18 @@ static void
 agw_gauge_init(AgwGauge *gauge)
 {
     AgwGaugePrivate *priv = agw_gauge_get_instance_private(gauge);
+    gchar *theme;
     gint i;
 
     gtk_widget_set_has_window(GTK_WIDGET(gauge), FALSE);
+
+    /* Set the default theme */
     for (i = 0; i < AGW_GAUGE_ELEMENT_LAST; ++i) {
         priv->svg[i] = NULL;
     }
+    theme = g_build_filename(PKGDATADIR, "assets", NULL);
+    set_theme(priv, theme, NULL);
+    g_free(theme);
 }
 
 
@@ -211,40 +251,13 @@ gboolean
 agw_gauge_set_theme(AgwGauge *gauge, const gchar *theme_dir, GError **error)
 {
     AgwGaugePrivate *priv;
-    gchar *file;
-    RsvgHandle *svg;
-    RsvgDimensionData dimension;
-    gint i;
 
     g_return_val_if_fail(AGW_IS_GAUGE(gauge), FALSE);
     g_return_val_if_fail(theme_dir != NULL, FALSE);
     g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
 
     priv = agw_gauge_get_instance_private(gauge);
-    priv->width  = 0;
-    priv->height = 0;
-    free_svg(priv);
-
-    for (i = 0; i < AGW_GAUGE_ELEMENT_LAST; ++i) {
-        file = g_build_filename(theme_dir, theme_file[i], NULL);
-        svg  = rsvg_handle_new_from_file(file, error);
-        g_free(file);
-
-        /* On errors, return false without further processing */
-        if (svg == NULL) {
-            g_assert(error == NULL || *error != NULL);
-            return FALSE;
-        }
-
-        /* Get the extents of the biggest element */
-        rsvg_handle_get_dimensions(svg, &dimension);
-        priv->width  = MAX(dimension.width, priv->width);
-        priv->height = MAX(dimension.height, priv->height);
-
-        priv->svg[i] = svg;
-    }
-
-    return TRUE;
+    return set_theme(priv, theme_dir, error);
 }
 
 /**
