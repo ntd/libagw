@@ -5,8 +5,9 @@ datadir    = join_paths(prefix, get_option('datadir'))
 pkgdatadir = join_paths(datadir, meson.project_name())
 assetsdir  = join_paths(pkgdatadir, 'assets')
 
-gtk_dep  = dependency('gtk+-3.0')
-rsvg_dep = dependency('librsvg-2.0')
+gtk_dep    = dependency('gtk+-3.0')
+serial_dep = dependency('libserialport')
+rsvg_dep   = dependency('librsvg-2.0')
 
 subdir('src')
 subdir('test')

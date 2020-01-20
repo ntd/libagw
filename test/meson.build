@@ -4,6 +4,7 @@ ardecoder_sources = files([
 
 ardecoder_deps = [
     gtk_dep,
+    serial_dep,
 ]
 
 executable('ardecoder',
