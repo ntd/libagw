@@ -40,3 +40,13 @@ agw = library('agw',
               version: agw_soversion,
               c_args: agw_cflags,
               install: true)
+
+
+# Install the glade catalog file, if possible
+if gladeui_dep.found()
+    catalog_dir = gladeui_dep.get_pkgconfig_variable('catalogdir')
+    catalog_files = files([
+        'libagw.xml',
+    ])
+    install_data(catalog_files,  install_dir: catalog_dir)
+endif

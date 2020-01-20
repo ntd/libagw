@@ -21,6 +21,7 @@ assetsdir  = join_paths(pkgdatadir, 'assets')
 gtk_dep    = dependency('gtk+-3.0')
 serial_dep = dependency('libserialport')
 rsvg_dep   = dependency('librsvg-2.0')
+gladeui_dep= dependency('gladeui-2.0', required: false)
 
 subdir('src')
 subdir('test')

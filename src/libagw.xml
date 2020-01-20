@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glade-catalog version="0.1" name="libagw" library="agw" domain="libagw" depends="gtk+">
+  <glade-widget-classes>
+    <glade-widget-class name="AgwGauge" title="Gauge widget" generic-name="gauge" get-type-function="agw_gauge_get_type">
+    </glade-widget-class>
+  </glade-widget-classes>
+  <glade-widget-group name="libagw" title="libagw">
+    <glade-widget-class-ref name="AgwGauge" />
+  </glade-widget-group>
+</glade-catalog>
