@@ -148,6 +148,7 @@ encoder_loop(gpointer user_data)
     gchar *line;
     gint n, value, homing;
     struct sp_port *port;
+    gboolean boot = TRUE;
 
     port = serial_open();
     if (port == NULL) {
@@ -161,9 +162,12 @@ encoder_loop(gpointer user_data)
         } else if (line[0] == '#') {
             /* Comment */
             g_message("%s", line + 1);
-            /* ardecoder booted: set refresh rate to 0,2 s */
-            serial_send(port, "S200\n");
-            serial_send(port, "1\n");
+            if (boot) {
+                /* ardecoder up and running: enable push-mode (0,1 s) */
+                serial_send(port, "S100\n");
+                serial_send(port, "1\n");
+                boot = FALSE;
+            }
         } else if (line[0] == '?') {
             /* Error */
             g_warning("%s", line + 1);
