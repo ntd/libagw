@@ -9,9 +9,9 @@ project('libagw', 'c', version: '0.1.0', license: 'LGPLv2.1+')
 #   then increment age.
 # - If any interfaces have been removed or changed since the last
 #   public release, then set age to 0.
-agw_current=0
-agw_revision=0
-agw_age=0
+agw_current  = 0
+agw_revision = 0
+agw_age      = 0
 
 prefix     = get_option('prefix')
 datadir    = join_paths(prefix, get_option('datadir'))
