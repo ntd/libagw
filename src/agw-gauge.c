@@ -227,9 +227,11 @@ GtkWidget *
 agw_gauge_new(void)
 {
     GtkWidget *widget = (GtkWidget *) g_object_new(AGW_TYPE_GAUGE, NULL);
+    /*
     GtkRange *range   = GTK_RANGE(widget);
     gtk_range_set_adjustment(range, NULL);
     gtk_range_set_range(range, -100, 100);
+    */
     return widget;
 }
 

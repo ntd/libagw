@@ -16,27 +16,17 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifndef __AGW_GAUGE_H__
-#define __AGW_GAUGE_H__
+#ifndef __AGW_H__
+#define __AGW_H__
 
-#include <gtk/gtk.h>
+#include "agw-gauge.h"
 
 
 G_BEGIN_DECLS
 
-#define AGW_TYPE_GAUGE agw_gauge_get_type()
-
-G_DECLARE_FINAL_TYPE(AgwGauge, agw_gauge, AGW, GAUGE, GtkRange)
-
-
-GtkWidget *     agw_gauge_new               (void);
-gboolean        agw_gauge_set_theme         (AgwGauge *     gauge,
-                                             const gchar *  theme_dir,
-                                             GError **      error);
-void            agw_gauge_set_value         (AgwGauge *     gauge,
-                                             gdouble        value);
+void        agw_init                (void);
 
 G_END_DECLS
 
 
-#endif /* __AGW_GAUGE_H__ */
+#endif /* __AGW_H__ */

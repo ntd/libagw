@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<glade-catalog name="libagw" library="agw" version="0.1" depends="gtk+"
-               supports="gtkbuilder" domain="libagw" book="libagw">
+<glade-catalog name="agw" library="agw" version="0.1" depends="gtk+">
+
+  <init-function>agw_init</init-function>
 
   <glade-widget-classes>
     <glade-widget-class name="AgwGauge" generic-name="gauge"
                         title="Gauge indicator"/>
   </glade-widget-classes>
 
-  <glade-widget-group name="libagw" title="Additional GTK widgets">
+  <glade-widget-group name="agw" title="Additional GTK widgets">
     <glade-widget-class-ref name="AgwGauge"/>
   </glade-widget-group>
 

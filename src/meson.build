@@ -1,9 +1,10 @@
 agw_sources = files([
+    'agw.c',
     'agw-gauge.c',
 ])
 
 agw_headers = files([
-    'libagw.h',
+    'agw.h',
     'agw-gauge.h',
 ])
 
@@ -52,7 +53,7 @@ agw = library('agw',
 if gladeui_dep.found()
     catalog_dir = gladeui_dep.get_pkgconfig_variable('catalogdir')
     catalog_files = files([
-        'libagw.xml',
+        'agw.xml',
     ])
     install_data(catalog_files,  install_dir: catalog_dir)
 endif
