@@ -1,6 +1,10 @@
 agw_sources = files([
-    'agw-gauge.h',
     'agw-gauge.c',
+])
+
+agw_headers = files([
+    'libagw.h',
+    'agw-gauge.h',
 ])
 
 agw_assets = files([
@@ -32,6 +36,8 @@ agw_cflags = [
     '-DPKGDATADIR="' + pkgdatadir + '"',
 ]
 
+
+install_headers(agw_headers, subdir: 'libagw')
 install_data(agw_assets,  install_dir: assetsdir)
 
 agw = library('agw',
@@ -50,3 +56,13 @@ if gladeui_dep.found()
     ])
     install_data(catalog_files,  install_dir: catalog_dir)
 endif
+
+
+# Generate and install the pkg-config file
+pkgconfig = import('pkgconfig')
+pkgconfig.generate(libraries : agw,
+                   subdirs : '.',
+                   version : meson.project_version(),
+                   name : meson.project_name(),
+                   filebase : meson.project_name(),
+                   description : 'Additional GTK Widgets')
