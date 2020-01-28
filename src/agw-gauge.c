@@ -82,7 +82,7 @@ draw(GtkWidget *widget, cairo_t *cr)
     GtkRange *range = GTK_RANGE(widget);
     GtkAdjustment *adjustment = gtk_range_get_adjustment(range);
     GtkAllocation room;
-    gdouble size, angle;
+    gdouble size, lower, upper, angle;
 
     gtk_widget_get_allocation(widget, &room);
     size = MIN(room.width, room.height);
@@ -101,8 +101,9 @@ draw(GtkWidget *widget, cairo_t *cr)
     rsvg_handle_render_cairo(priv->svg[AGW_GAUGE_ELEMENT_MARKS], cr);
 
     /* Draw the hand */
-    angle = gtk_adjustment_get_value(adjustment) *
-            G_PI / gtk_adjustment_get_upper(adjustment);
+    lower = gtk_adjustment_get_lower(adjustment);
+    upper = gtk_adjustment_get_upper(adjustment);
+    angle = gtk_adjustment_get_value(adjustment) * 2*G_PI / (upper - lower);
     if (gtk_range_get_inverted(range)) {
         angle = -angle;
     }
@@ -282,7 +283,7 @@ agw_gauge_set_value(AgwGauge *gauge, gdouble value)
     while (value < lower) {
         value += upper - lower;
     }
-    while (value > upper) {
+    while (value >= upper) {
         value -= upper - lower;
     }
 
