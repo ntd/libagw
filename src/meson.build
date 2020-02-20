@@ -52,11 +52,15 @@ agw = library('agw',
 # Install the glade catalog file, if possible
 if gladeui_dep.found()
     catalog_dir = gladeui_dep.get_pkgconfig_variable('catalogdir')
-    catalog_files = files([
-        'agw.xml',
-    ])
-    install_data(catalog_files,  install_dir: catalog_dir)
+else
+    # gladeui package not found: use the default hardcoded path
+    catalog_dir = '/usr/share/glade/catalogs'
 endif
+
+catalog_files = files([
+    'agw.xml',
+])
+install_data(catalog_files,  install_dir: catalog_dir)
 
 
 # Generate and install the pkg-config file
