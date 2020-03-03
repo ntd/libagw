@@ -16,6 +16,32 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+/**
+ * SECTION:agw-gauge
+ * @short_description: A `GtkRange` based clock widget
+ *
+ * The front-end of this widget is compatible with the
+ * [cairo-clock](https://launchpad.net/cairo-clock) project. This allows
+ * to reuse the SVG provided by that project.
+ *
+ * The limits can be set by setting the upper and lower values of the
+ * underlying `GtkAdjustment`. The agw_gauge_set_value() method can be
+ * used instead of gtk_range_set_value() when you want the value to be
+ * wrapped around instead of clamped inside the limits.
+ *
+ * The origin (i.e. the position of the clock hand when the value is at
+ * minimum) can be defined by setting the `fill-level` property to the
+ * proper angle (in radiants). By default the origin is north, that is
+ * the fill level is set to `-G_PI_2`.
+ **/
+
+/**
+ * AgwGauge:
+ *
+ * All fields are private and should not be used directly.
+ * Use its public methods instead.
+ **/
+
 #include "agw-gauge.h"
 #include <math.h>
 #include <librsvg/rsvg.h>
@@ -107,7 +133,7 @@ draw(GtkWidget *widget, cairo_t *cr)
     if (gtk_range_get_inverted(range)) {
         angle = -angle;
     }
-    angle -= G_PI_2;
+    angle += gtk_range_get_fill_level(GTK_RANGE(widget));
 
     cairo_save(cr);
     cairo_translate(cr, priv->width / 2, priv->height / 2);
@@ -206,6 +232,7 @@ agw_gauge_init(AgwGauge *gauge)
     gint i;
 
     gtk_widget_set_has_window(GTK_WIDGET(gauge), FALSE);
+    gtk_range_set_fill_level(GTK_RANGE(gauge), -G_PI_2);
 
     /* Set the default theme */
     for (i = 0; i < AGW_GAUGE_ELEMENT_LAST; ++i) {
