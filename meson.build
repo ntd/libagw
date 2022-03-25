@@ -19,7 +19,7 @@ pkgdatadir = join_paths(datadir, meson.project_name())
 assetsdir  = join_paths(pkgdatadir, 'assets')
 
 gtk_dep    = dependency('gtk+-3.0')
-serial_dep = dependency('libserialport')
+serial_dep = dependency('libserialport', required: get_option('grbl'))
 rsvg_dep   = dependency('librsvg-2.0')
 gladeui_dep= dependency('gladeui-2.0', required: false)
 

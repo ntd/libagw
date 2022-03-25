@@ -1,0 +1,4 @@
+option('grbl',
+       type: 'feature',
+       value: 'auto',
+       description: 'Enable GRBL-based test program')
