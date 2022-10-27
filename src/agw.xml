@@ -6,10 +6,13 @@
   <glade-widget-classes>
     <glade-widget-class name="AgwGauge" generic-name="gauge"
                         title="Gauge indicator"/>
+    <glade-widget-class name="AgwNumericLabel" generic-name="numeric-label"
+                        title="Numeric label"/>
   </glade-widget-classes>
 
   <glade-widget-group name="agw" title="Additional GTK widgets">
     <glade-widget-class-ref name="AgwGauge"/>
+    <glade-widget-class-ref name="AgwNumericLabel"/>
   </glade-widget-group>
 
 </glade-catalog>

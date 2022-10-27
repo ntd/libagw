@@ -1,11 +1,13 @@
 agw_sources = files([
     'agw.c',
     'agw-gauge.c',
+    'agw-numeric-label.c',
 ])
 
 agw_headers = files([
     'agw.h',
     'agw-gauge.h',
+    'agw-numeric-label.h',
 ])
 
 agw_assets = files([
