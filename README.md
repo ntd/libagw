@@ -6,6 +6,8 @@ WIDGET LIST
 
 - `AgwGauge`\
   A `GtkRange` based clock widget. Frontend inspired by cairo-clock.
+- `AgwNumericLabel`\
+  A `GtkLabel` with a numeric "value" property.
 
 
 LICENSE
