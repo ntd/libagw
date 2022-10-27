@@ -138,7 +138,12 @@ agw_numeric_label_class_init(AgwNumericLabelClass *class)
 static void
 agw_numeric_label_init(AgwNumericLabel *label)
 {
+    AgwNumericLabelPrivate *priv = agw_numeric_label_get_instance_private(label);
+
     gtk_label_set_use_markup(GTK_LABEL(label), FALSE);
+
+    priv->format = g_strdup("%g");
+    priv->value = 0;
 }
 
 
