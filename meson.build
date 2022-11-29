@@ -1,4 +1,4 @@
-project('libagw', 'c', version: '0.2.0', license: 'LGPLv2.1+')
+project('libagw', 'c', version: '0.2.1', license: 'LGPLv2.1+')
 
 # How to handle LT versions (current:revision:age):
 # - If the library source code has changed at all since the last
@@ -10,7 +10,7 @@ project('libagw', 'c', version: '0.2.0', license: 'LGPLv2.1+')
 # - If any interfaces have been removed or changed since the last
 #   public release, then set age to 0.
 agw_current  = 1
-agw_revision = 0
+agw_revision = 1
 agw_age      = 1
 
 prefix     = get_option('prefix')
