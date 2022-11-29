@@ -17,28 +17,21 @@
  */
 
 #include "agw-gauge.h"
+#include "agw-numeric-label.h"
 
 
 /**
  * agw_init:
  *
- * Initialize libagw. Theoretically this function is bogus but using 
- * AgwGauge in a GtkBuilder file leads up to a segmentation fault:
- * ```
- * Thread 1 ... received signal SIGTRAP, Trace/breakpoint trap.
- * 0x00007ffff74cc166 in ?? () from /usr/lib/libglib-2.0.so.0
- * (gdb) bt
- * #0  0x00007ffff74cc166 in  () at /usr/lib/libglib-2.0.so.0
- * #1  0x00007ffff74c90bb in g_log_structured_standard () at /usr/lib/libglib-2.0.so.0
- * #2  0x00007ffff7c2f015 in gtk_builder_new_from_file () at /usr/lib/libgtk-3.so.0
- * ...
- * ```
+ * Initialize libagw.
  *
- * Calling agw_gauge_get_type() before loading the builder file solves
- * the issue.
+ * Using any widget from GtkBuilder requires it to be already present
+ * in the type system, so this function ensures every AGW widget is
+ * registered.
  **/
 void
 agw_init(void)
 {
-    agw_gauge_get_type();
+    g_type_ensure(AGW_TYPE_GAUGE);
+    g_type_ensure(AGW_TYPE_NUMERIC_LABEL);
 }
