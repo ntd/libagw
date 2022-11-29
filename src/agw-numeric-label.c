@@ -141,9 +141,13 @@ agw_numeric_label_init(AgwNumericLabel *label)
     AgwNumericLabelPrivate *priv = agw_numeric_label_get_instance_private(label);
 
     gtk_label_set_use_markup(GTK_LABEL(label), FALSE);
+    gtk_label_set_use_underline(GTK_LABEL(label), FALSE);
 
     priv->format = g_strdup("%g");
     priv->value = 0;
+
+    /* Ensure the text is updated at least once */
+    agw_numeric_label_update_text(label);
 }
 
 
@@ -269,6 +273,6 @@ agw_numeric_label_update_text(AgwNumericLabel *label)
 
     priv = agw_numeric_label_get_instance_private(label);
     text = g_strdup_printf(priv->format, priv->value);
-    gtk_label_set_text(GTK_LABEL(label), text);
+    gtk_label_set_label(GTK_LABEL(label), text);
     g_free(text);
 }
