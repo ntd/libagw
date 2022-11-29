@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<glade-catalog name="agw" library="agw" version="0.1" depends="gtk+">
+<glade-catalog name="agw" library="agw" version="0.2" depends="gtk+">
 
   <init-function>agw_init</init-function>
 
   <glade-widget-classes>
-    <glade-widget-class name="AgwGauge" generic-name="gauge"
-                        title="Gauge indicator"/>
-    <glade-widget-class name="AgwNumericLabel" generic-name="numeric-label"
-                        title="Numeric label"/>
+    <glade-widget-class name="AgwGauge"
+                        generic-name="gauge"
+                        title="Gauge indicator"
+                        since="0.1"/>
+    <glade-widget-class name="AgwNumericLabel"
+                        generic-name="numeric-label"
+                        title="Numeric label"
+                        since="0.2"/>
   </glade-widget-classes>
 
   <glade-widget-group name="agw" title="Additional GTK widgets">
