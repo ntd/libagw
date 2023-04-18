@@ -1,4 +1,4 @@
-project('libagw', 'c', version: '0.2.1', license: 'LGPLv2.1+')
+project('libagw', 'c', version: '0.2.2', license: 'LGPLv2.1+')
 
 # How to handle LT versions (current:revision:age):
 # - If the library source code has changed at all since the last
