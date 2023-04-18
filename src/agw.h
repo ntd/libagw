@@ -20,6 +20,7 @@
 #define __AGW_H__
 
 #include "agw-gauge.h"
+#include "agw-numeric-label.h"
 
 
 G_BEGIN_DECLS
